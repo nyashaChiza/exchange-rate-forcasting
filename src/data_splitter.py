@@ -2,14 +2,16 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import os
 
-def split_data(data_path:str , data_dir='data'):
-    # Convert 'date' column to datetime
+def split_data(data_path: str, data_dir='data'):
+    # Read the data from CSV
     df = pd.read_csv(data_path)
+
+    # Convert 'date' column to datetime
     df['date'] = pd.to_datetime(df['date'])
     
-    # Split data into features (X) and target variable (y)
-    X = df['date'].values.reshape(-1, 1)  # Reshape to 2D array for compatibility
-    y = df['rate']
+    # Define features (X) and target variable (y)
+    X = df.drop(columns=['rate'])  # Features excluding the target variable
+    y = df['rate']  # Target variable
     
     # Split the data into training and testing sets (80% train, 20% test)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -22,9 +24,12 @@ def split_data(data_path:str , data_dir='data'):
     training_data_path = os.path.join(data_dir, 'training-data', 'training_data.csv')
     testing_data_path = os.path.join(data_dir, 'test-data', 'testing_data.csv')
     
-    pd.DataFrame({'date': X_train.flatten(), 'rate': y_train}).to_csv(training_data_path, index=False)
-    pd.DataFrame({'date': X_test.flatten(), 'rate': y_test}).to_csv(testing_data_path, index=False)
+    # Concatenate X_train/X_test with y_train/y_test to maintain consistency in indices
+    train_data = pd.concat([X_train, y_train], axis=1)
+    test_data = pd.concat([X_test, y_test], axis=1)
+    
+    # Save to CSV
+    train_data.to_csv(training_data_path, index=False)
+    test_data.to_csv(testing_data_path, index=False)
     
     print("Training and testing data saved successfully.")
-
-
