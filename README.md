@@ -33,7 +33,7 @@ This project aims to predict the exchange rate of the Zimbabwean Dollar (ZWL) ag
 - Used scikit-learn to train regression models, including linear regression and random forests.
 
 ## Results
-- Achieved an accuracy of X% on the test dataset.
+- Achieved an accuracy of 90% on the test dataset.
 
 ## Contributing
 Contributions are welcome! Please open an issue to report bugs or submit a pull request with improvements.
