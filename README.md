@@ -27,7 +27,7 @@ This project aims to predict the exchange rate of the Zimbabwean Dollar (ZWL) ag
 3. Run Jupyter notebooks in the `notebooks/` directory.
 
 ## Data Sources
-- Historical exchange rate data obtained from [source].
+- Historical exchange rate data obtained from [(https://databank.worldbank.org/reports.aspx?source=global-economic-monitor-%28gem%29#)].
 
 ## Modeling Approach
 - Used scikit-learn to train regression models, including linear regression and random forests.
